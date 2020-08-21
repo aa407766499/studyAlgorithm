@@ -8,8 +8,24 @@ public class SimpleLinkedList {
 
     private Node head = new Node();
 
+    public Node getHead() {
+        return head;
+    }
+
+    public void setHead(Node head) {
+        this.head = head;
+    }
+
     public void add(Node node) {
-        head.setNext(node);
+        Node next = head.getNext();
+        while (next != null && next.getNext() != null) {
+            next = next.getNext();
+        }
+        if (next == null) {
+            head.setNext(node);
+        }else {
+            next.setNext(node);
+        }
     }
 
     public Node get(String value) {
@@ -39,9 +55,15 @@ public class SimpleLinkedList {
             if (next.getData().equals(value)) {
                 pre.setNext(next.getNext());
                 next.setNext(null);
+                return;
             }
             pre = next;
             next = next.getNext();
         }
+    }
+
+    public static void main(String[] args) {
+        SimpleLinkedList linkedList = new SimpleLinkedList();
+
     }
 }
